@@ -7,7 +7,7 @@ public class Menu {
     public static int opcao;
     public  static Scanner entrada = new Scanner(System.in);
 
-    public static void menu(Arvore arvore){
+    public  void menu(Arvore arvore) {
         System.out.println("Alunos: Marcos Lacet e Júlio Ximenes");
         System.out.println("Disciplina: Estrutura de Dados I");
         System.out.println("Professor: Walace Bonfim");
@@ -20,16 +20,31 @@ public class Menu {
 
                 break;
             case 2:
-
+                System.out.println("Insira o RGM para remoção: ");
+                int rgm = entrada.nextInt();
+                Aluno aluno = new Aluno(rgm);
+                arvore.remover(arvore.raiz,aluno);
+                menu(arvore);
                 break;
             case 3:
                 break;
             case 4:
                 System.out.println("Cuidado! Essa operação vai apagar toda àrvore de Alunos!\n Deseja Continuar? [1] Sim \n [2] Não");
                 opcao = entrada.nextInt();
+                switch (opcao){
+                    case 1:
+                        arvore.raiz = null;
+                        break;
+                    case 2:
+                        menu(arvore);
+                        break;
+                }
+
+
+                menu(arvore);
                 break;
             case 5:
-                System.out.println("Como você deseja exibir a Árvore? \n [1] InOrdem \n [2]PreOrdem \n [3]PosOrdem");
+                System.out.println("Como você deseja exibir a Árvore? \n [1] InOrdem \n [2] PreOrdem \n [3] PosOrdem \n [4] Voltar");
                 opcao = entrada.nextInt();
                 func_ExibirArvore(arvore);
                 menu(arvore);
@@ -43,28 +58,33 @@ public class Menu {
 
         }
     }
-    public static void func_ExibirArvore(Arvore arvore){
+    public void func_ExibirArvore(Arvore arvore){
         switch (opcao){
             case 1:
+                System.out.println("/////////////");
                 arvore.percorrerInOrdem(arvore.raiz);
+                System.out.println("/////////////");
                 break;
             case 2:
+                System.out.println("/////////////");
+                arvore.percorrerPreOrdem(arvore.raiz);
+                System.out.println("/////////////");
                 break;
             case 3:
+                System.out.println("/////////////");
+                arvore.percorrerPosOrdem(arvore.raiz);
+                System.out.println("/////////////");
                 break;
             case 4:
+                System.out.println("/////////////");
                 System.out.println("Retornando ao Menu Inicial...");
+                System.out.println("/////////////");
                 menu(arvore);
-        }
-
-    }
-
-    public static void apagarÁrvore(Arvore arvore){
-        switch (opcao){
-            case 1:
                 break;
-            case 2:
-                menu(arvore);
         }
+
     }
+
+
+
 }

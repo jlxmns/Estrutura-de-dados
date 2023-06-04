@@ -4,6 +4,10 @@ public class Aluno {
     private String nome;
 
     public Aluno() {}
+
+    public  Aluno(int rgm){
+        this.rgm=rgm;
+    }
     public Aluno(int rgm, String nome) {
         this.rgm = rgm;
         this.nome = nome;
