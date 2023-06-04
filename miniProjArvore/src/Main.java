@@ -8,6 +8,7 @@ public class Main {
             arvoreBinaria.adicionarNo(aluno);
         }
 
+
         arvoreBinaria.percorrerInOrdem(arvoreBinaria.raiz);
         System.out.println();
         arvoreBinaria.percorrerPreOrdem(arvoreBinaria.raiz);
@@ -32,6 +33,10 @@ public class Main {
         System.out.println("/////////////APÓS A REMOÇÃO/////////////");
         System.out.println();
         arvoreBinaria.percorrerInOrdem(arvoreBinaria.raiz);
+
+
+        Menu.menu(arvoreBinaria);
+
 
 
     }
