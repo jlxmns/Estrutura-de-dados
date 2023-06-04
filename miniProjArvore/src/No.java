@@ -8,4 +8,8 @@ public class No {
         direita = null;
         esquerda = null;
     }
+
+    public No() {
+
+    }
 }

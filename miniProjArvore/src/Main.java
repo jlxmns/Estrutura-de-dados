@@ -13,7 +13,18 @@ public class Main {
         arvoreBinaria.percorrerPreOrdem(arvoreBinaria.raiz);
         System.out.println();
         arvoreBinaria.percorrerPosOrdem(arvoreBinaria.raiz);
-        Aluno novoTeste = new Aluno(6, "Marcos");
+
+        Aluno novoTeste = new Aluno(7, "Marcos");
         arvoreBinaria.adicionarNo(novoTeste);
+
+        System.out.println();
+        arvoreBinaria.percorrerInOrdem(arvoreBinaria.raiz);
+        System.out.println();
+
+        arvoreBinaria.remover(arvoreBinaria.raiz, novoTeste);
+
+        System.out.println();
+        arvoreBinaria.percorrerInOrdem(arvoreBinaria.raiz);
+
     }
 }

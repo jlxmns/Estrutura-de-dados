@@ -1,4 +1,5 @@
 public class Aluno {
+
     private int rgm;
     private String nome;
 
