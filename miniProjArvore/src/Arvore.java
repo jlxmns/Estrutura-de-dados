@@ -1,5 +1,7 @@
 public class Arvore {
     No raiz;
+    private Arvore esq;
+    private Arvore dir;
 
     //Essa função é privada e serve para adicionar o nó seguindo a regra da ABB
     private No adicionarNoRecursivo(No atual, Aluno aluno) {
@@ -51,26 +53,40 @@ public class Arvore {
             percorrerInOrdem(no.direita);
             System.out.println("RGM: " + no.aluno.getRgm() + " Nome: " + no.aluno.getNome());
         }
+
     }
 
 
     //Função para remoção de UM elemento
     public No remover(No atual, Aluno aluno) {
-        if (atual == null) {
+        if (atual == null) { //Não há nó a ser removido
+            System.out.println("Não há nó a ser removido");
+            return null;
+        }
+        if (aluno.getRgm() == atual.aluno.getRgm()) {
+            // Caso 1: Remoção de um nó folha
+            if (atual.esquerda == null && atual.direita == null) {
                 return null;
             }
+        else {// caso 2 - eu tenho filhos à esquerda, porem não tenho à direita
+            if (atual.esquerda != null && atual.direita == null) {
+                return atual.esquerda;
 
-            if (aluno.getRgm()== atual.aluno.getRgm()) {
-                atual.aluno.setNome(null);
-                atual.aluno.setRgm(0);
+            } else if (atual.direita != null && atual.esquerda == null) { // caso 3 - eu tenho filhos à direita, porem nao tenho à esquerda
+                return atual.direita;
             }
-            if (aluno.getRgm()< atual.aluno.getRgm()) {
-                atual.esquerda = remover(atual.esquerda, aluno);
-                return atual;
-            }
-            atual.direita = remover(atual.direita, aluno);
+        }
+        }
+
+        if (aluno.getRgm() < atual.aluno.getRgm()) {
+            atual.esquerda = remover(atual.esquerda, aluno);
             return atual;
         }
+        atual.direita = remover(atual.direita, aluno);
+        return atual;
+    }
+
+
 
 
 
@@ -86,8 +102,13 @@ public class Arvore {
                 : contemNo(atual.direita, aluno);
     }
 
-    public boolean contemNoRaiz(Aluno aluno) {
-        return contemNo(raiz, aluno);
+    public No pesquisaNo(No atual, Aluno aluno) {
+        boolean noCheck = contemNo(atual, aluno);
+
+        if (noCheck) {
+            return atual;
+        }
+        return null;
     }
 }
 
