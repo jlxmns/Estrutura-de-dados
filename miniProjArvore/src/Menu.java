@@ -18,22 +18,42 @@ public class Menu {
         switch (opcao){
             case 1:
 
+                System.out.println("Insira o RGM do aluno: ");
+                int rgm;
+                rgm = entrada.nextInt();
+
+                System.out.println("Insira o nome do aluno: ");
+                String nome;
+                nome = entrada.next();
+
+                Aluno aluno = new Aluno(rgm, nome);
+                arvore.adicionarNo(aluno);
+                menu(arvore);
                 break;
             case 2:
                 System.out.println("Insira o RGM para remoção: ");
-                int rgm = entrada.nextInt();
+                rgm = entrada.nextInt();
 
 
-                String nome = arvore.buscarAluno(arvore.raiz, rgm);
+                nome = arvore.buscarAluno(arvore.raiz, rgm);
 
                 System.out.println("Registro a ser removido: \n RGM: "+rgm+" Aluno: "+nome);
 
-                Aluno aluno = new Aluno(rgm, nome);
+                aluno = new Aluno(rgm, nome);
 
                 arvore.remover(arvore.raiz,aluno);
                 menu(arvore);
                 break;
             case 3:
+                System.out.println("Insira o RGM para pesquisar: ");
+                rgm = entrada.nextInt();
+                nome = arvore.buscarAluno(arvore.raiz, rgm);
+                if (nome==null){
+                    System.out.println("Não foi possível encontrar nenhum aluno registrado com esse RGM.");
+                }
+                else{
+                    System.out.println("RGM: "+rgm+" Nome: "+nome);
+                }
                 break;
             case 4:
                 System.out.println("Cuidado! Essa operação vai apagar toda àrvore de Alunos!\n Deseja Continuar? [1] Sim \n [2] Não");
