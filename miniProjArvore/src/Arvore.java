@@ -1,8 +1,7 @@
+import java.io.PrintStream;
+
 public class Arvore {
     No raiz;
-
-    private Arvore esq;
-    private Arvore dir;
 
     //Essa função é privada e serve para adicionar o nó seguindo a regra da ABB
     private No adicionarNoRecursivo(No atual, Aluno aluno) {
@@ -67,32 +66,41 @@ public class Arvore {
             System.out.println("Não há nó a ser removido");
             return null;
         }
-        if (aluno.getRgm() == atual.aluno.getRgm()) {
 
+        if (aluno.getRgm() == atual.aluno.getRgm()) {
             // Caso 1: Remoção de um nó folha
             if (atual.esquerda == null && atual.direita == null) {
                 return null;
-            } else {// caso 2 - eu tenho filhos à esquerda, porem não tenho à direita
-                if (atual.esquerda != null && atual.direita == null) {
-                    return atual.esquerda;
-
-                } else if (atual.direita != null && atual.esquerda == null) { // caso 3 - eu tenho filhos à direita, porem nao tenho à esquerda
-                    return atual.direita;
-                }
             }
 
+            // Caso 2: Remoção de um nó com apenas 1 filho
+            if (atual.direita == null) {
+                return atual.esquerda;
+            }
 
-        }
+            if (atual.esquerda == null) {
+                return atual.direita;
+            }
 
-        if (aluno.getRgm() < atual.aluno.getRgm()) {
-            atual.esquerda = remover(atual.esquerda, aluno);
-
+            // Caso 3 Remoção de um nó com 2 filhos
+            Aluno sucessor = acharSucessor(atual.direita);
+            atual.aluno = sucessor;
+            atual.direita = remover(atual.direita, sucessor);
             return atual;
         }
+
+        if (aluno.getRgm() < atual.aluno.getRgm()) { //O RGM informado é menor
+            atual.esquerda = remover(atual.esquerda, aluno);
+            return atual;
+        }
+
         atual.direita = remover(atual.direita, aluno);
         return atual;
     }
 
+    private Aluno acharSucessor(No raiz) {
+        return raiz.esquerda == null ? raiz.aluno : acharSucessor(raiz.esquerda);
+    }
 
     public boolean contemNo(No atual, Aluno aluno) {
         if (atual == null) {
@@ -120,6 +128,57 @@ public class Arvore {
         }
 
 
+    }
+
+    private String graficoPreOrdem(No raiz) {
+        if(raiz == null) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("RGM: ");
+        sb.append(raiz.aluno.getRgm());
+        sb.append(" - Nome: ");
+        sb.append(raiz.aluno.getNome());
+
+        String apontadorDireita = "└──";
+        String apontadorEsquerda = (raiz.direita != null) ? "├──" : "└──";
+
+        leitorDeNos(sb, "", apontadorEsquerda, raiz.esquerda, raiz.direita != null);
+        leitorDeNos(sb, "", apontadorDireita, raiz.direita, false);
+
+        return sb.toString();
+    }
+
+    private void leitorDeNos(StringBuilder sb, String padding, String apontador, No no, Boolean temNoDireita) {
+        if(no != null) {
+            sb.append("\n");
+            sb.append(padding);
+            sb.append(apontador);
+            sb.append("RGM: ");
+            sb.append(no.aluno.getRgm());
+            sb.append(" - Nome: ");
+            sb.append(no.aluno.getNome());
+
+            StringBuilder construtorDePadding = new StringBuilder(padding);
+            if(temNoDireita) {
+                construtorDePadding.append("│  ");
+            } else {
+                construtorDePadding.append("   ");
+            }
+
+            String paddingAmbos = construtorDePadding.toString();
+            String apontadorDireita = "└──";
+            String apontadorEsquerda = (no.direita != null) ? "├──" : "└──";
+
+            leitorDeNos(sb, paddingAmbos, apontadorEsquerda, no.esquerda, no.direita != null);
+            leitorDeNos(sb, paddingAmbos, apontadorDireita, no.direita, false);
+        }
+    }
+
+    public void imprimirGraficamente(PrintStream impressor) {
+        impressor.print(graficoPreOrdem(this.raiz));
+        System.out.println("");
     }
 }
 

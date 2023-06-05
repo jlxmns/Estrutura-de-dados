@@ -37,7 +37,7 @@ public class Menu {
                         break;
                     case 2:
                         System.out.println("Encerrando Aplicação...");
-                        break;
+                        System.exit(0);
                     default: System.out.println("Opção inválida!");
                 }
 
@@ -64,7 +64,7 @@ public class Menu {
                         break;
                     case 2:
                         System.out.println("Encerrando Aplicação...");
-                        break;
+                        System.exit(0);
                     default: System.out.println("Opção inválida!");
                 }
                 break;
@@ -86,7 +86,7 @@ public class Menu {
                         break;
                     case 2:
                         System.out.println("Encerrando Aplicação...");
-                        break;
+                        System.exit(0);
                     default: System.out.println("Opção inválida!");
                 }
                 break;
@@ -110,7 +110,7 @@ public class Menu {
                         break;
                     case 2:
                         System.out.println("Encerrando Aplicação...");
-                        break;
+                        System.exit(0);
                     default: System.out.println("Opção inválida!");
                 }
 
@@ -129,13 +129,13 @@ public class Menu {
                         break;
                     case 2:
                         System.out.println("Encerrando Aplicação...");
-                        break;
+                        System.exit(0);
                     default: System.out.println("Opção inválida!");
                 }
                 break;
             case 0:
                 System.out.println("Encerrando Aplicação...");
-                break;
+                System.exit(0);
             default:
                 System.out.println("Opção inválida! Tente novamente");
                 menu(arvore);
@@ -148,15 +148,21 @@ public class Menu {
                 System.out.println("/////////////");
                 arvore.percorrerInOrdem(arvore.raiz);
                 System.out.println("/////////////");
+                arvore.imprimirGraficamente(System.out);
+                System.out.println("/////////////");
                 break;
             case 2:
                 System.out.println("/////////////");
                 arvore.percorrerPreOrdem(arvore.raiz);
                 System.out.println("/////////////");
+                arvore.imprimirGraficamente(System.out);
+                System.out.println("/////////////");
                 break;
             case 3:
                 System.out.println("/////////////");
                 arvore.percorrerPosOrdem(arvore.raiz);
+                System.out.println("/////////////");
+                arvore.imprimirGraficamente(System.out);
                 System.out.println("/////////////");
                 break;
             case 4:
@@ -166,27 +172,19 @@ public class Menu {
                 menu(arvore);
                 break;
         }
-
     }
-    public void apagarArvore(Arvore arvore){
-        //Exclui nó por nó da árvore, checando por ramos á direita ou esquerda == null;
-        if (arvore.raiz.esquerda == null){
-           arvore.percorrerInOrdem(arvore.raiz.esquerda);
-           arvore.raiz=null;
-        }
-        else if (arvore.raiz.direita == null){
-            arvore.percorrerInOrdem(arvore.raiz.direita);
-            arvore.raiz=null;
-        }
-        else {
-            arvore.raiz=null;
-        }
-
-
-
-
+    public void apagarArvore(Arvore arvore) {
+        apagarNo(arvore.raiz);
+        arvore.raiz = null;
     }
 
+    private void apagarNo(No no) {
+        if (no == null) {
+            return;
+        }
 
-
+        apagarNo(no.esquerda);
+        apagarNo(no.direita);
+        no = null;
+    }
 }

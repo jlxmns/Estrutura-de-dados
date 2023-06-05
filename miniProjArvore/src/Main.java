@@ -17,12 +17,6 @@ public class Main {
         arvoreBinaria.adicionarNo(aluno1);
 
        Menu menu = new Menu();
-        menu.menu(arvoreBinaria);
-
-
-
-
-
-
+       menu.menu(arvoreBinaria);
     }
 }
