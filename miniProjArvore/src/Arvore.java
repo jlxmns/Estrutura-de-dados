@@ -1,5 +1,6 @@
 public class Arvore {
     No raiz;
+
     private Arvore esq;
     private Arvore dir;
 
@@ -37,6 +38,7 @@ public class Arvore {
             System.out.println("RGM: " + no.aluno.getRgm() + " Nome: " + no.aluno.getNome());
             percorrerInOrdem(no.direita);
         }
+
     }
 
     public void percorrerPreOrdem(No no) {
@@ -59,35 +61,37 @@ public class Arvore {
 
     //Função para remoção de UM elemento
     public No remover(No atual, Aluno aluno) {
+
+
         if (atual == null) { //Não há nó a ser removido
             System.out.println("Não há nó a ser removido");
             return null;
         }
         if (aluno.getRgm() == atual.aluno.getRgm()) {
+
             // Caso 1: Remoção de um nó folha
             if (atual.esquerda == null && atual.direita == null) {
                 return null;
-            }
-        else {// caso 2 - eu tenho filhos à esquerda, porem não tenho à direita
-            if (atual.esquerda != null && atual.direita == null) {
-                return atual.esquerda;
+            } else {// caso 2 - eu tenho filhos à esquerda, porem não tenho à direita
+                if (atual.esquerda != null && atual.direita == null) {
+                    return atual.esquerda;
 
-            } else if (atual.direita != null && atual.esquerda == null) { // caso 3 - eu tenho filhos à direita, porem nao tenho à esquerda
-                return atual.direita;
+                } else if (atual.direita != null && atual.esquerda == null) { // caso 3 - eu tenho filhos à direita, porem nao tenho à esquerda
+                    return atual.direita;
+                }
             }
-        }
+
+
         }
 
         if (aluno.getRgm() < atual.aluno.getRgm()) {
             atual.esquerda = remover(atual.esquerda, aluno);
+
             return atual;
         }
         atual.direita = remover(atual.direita, aluno);
         return atual;
     }
-
-
-
 
 
     public boolean contemNo(No atual, Aluno aluno) {
@@ -102,15 +106,23 @@ public class Arvore {
                 : contemNo(atual.direita, aluno);
     }
 
-    public No pesquisaNo(No atual, Aluno aluno) {
-        boolean noCheck = contemNo(atual, aluno);
-
-        if (noCheck) {
-            return atual;
+    public static String buscarAluno(No atual, int matricula) {
+        if (atual == null || atual.aluno.getRgm() == matricula) {
+            if (atual != null) {
+                return atual.aluno.getNome();
+            } else {
+                return null;
+            }
+        } else if (matricula < atual.aluno.getRgm()) {
+            return buscarAluno(atual.esquerda, matricula);
+        } else {
+            return buscarAluno(atual.direita, matricula);
         }
-        return null;
+
+
     }
 }
+
 
 
 

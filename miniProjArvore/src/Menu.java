@@ -22,7 +22,14 @@ public class Menu {
             case 2:
                 System.out.println("Insira o RGM para remoção: ");
                 int rgm = entrada.nextInt();
-                Aluno aluno = new Aluno(rgm);
+
+
+                String nome = arvore.buscarAluno(arvore.raiz, rgm);
+
+                System.out.println("Registro a ser removido: \n RGM: "+rgm+" Aluno: "+nome);
+
+                Aluno aluno = new Aluno(rgm, nome);
+
                 arvore.remover(arvore.raiz,aluno);
                 menu(arvore);
                 break;
@@ -33,7 +40,7 @@ public class Menu {
                 opcao = entrada.nextInt();
                 switch (opcao){
                     case 1:
-                        arvore.raiz = null;
+                        apagarArvore(arvore);
                         break;
                     case 2:
                         menu(arvore);
@@ -82,6 +89,24 @@ public class Menu {
                 menu(arvore);
                 break;
         }
+
+    }
+    public void apagarArvore(Arvore arvore){
+        //Exclui nó por nó da árvore, checando por ramos á direita ou esquerda == null;
+        if (arvore.raiz.esquerda == null){
+           arvore.percorrerInOrdem(arvore.raiz.esquerda);
+           arvore.raiz=null;
+        }
+        else if (arvore.raiz.direita == null){
+            arvore.percorrerInOrdem(arvore.raiz.direita);
+            arvore.raiz=null;
+        }
+        else {
+            arvore.raiz=null;
+        }
+
+
+
 
     }
 
