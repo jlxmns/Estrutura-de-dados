@@ -28,7 +28,20 @@ public class Menu {
 
                 Aluno aluno = new Aluno(rgm, nome);
                 arvore.adicionarNo(aluno);
-                menu(arvore);
+                System.out.println("Aluno inserido com sucesso!");
+                System.out.println("[1] Retornar ao Menu \n [2] Sair da Aplicação");
+                opcao = entrada.nextInt();
+                switch (opcao){
+                    case 1:
+                        menu(arvore);
+                        break;
+                    case 2:
+                        System.out.println("Encerrando Aplicação...");
+                        break;
+                    default: System.out.println("Opção inválida!");
+                }
+
+
                 break;
             case 2:
                 System.out.println("Insira o RGM para remoção: ");
@@ -42,7 +55,18 @@ public class Menu {
                 aluno = new Aluno(rgm, nome);
 
                 arvore.remover(arvore.raiz,aluno);
-                menu(arvore);
+                System.out.println("Aluno removido com sucesso!");
+                System.out.println("[1] Retornar ao Menu \n [2] Sair da Aplicação");
+                opcao = entrada.nextInt();
+                switch (opcao){
+                    case 1:
+                        menu(arvore);
+                        break;
+                    case 2:
+                        System.out.println("Encerrando Aplicação...");
+                        break;
+                    default: System.out.println("Opção inválida!");
+                }
                 break;
             case 3:
                 System.out.println("Insira o RGM para pesquisar: ");
@@ -53,6 +77,17 @@ public class Menu {
                 }
                 else{
                     System.out.println("RGM: "+rgm+" Nome: "+nome);
+                }
+                System.out.println("[1] Retornar ao Menu \n [2] Sair da Aplicação");
+                opcao=entrada.nextInt();
+                switch (opcao){
+                    case 1:
+                        menu(arvore);
+                        break;
+                    case 2:
+                        System.out.println("Encerrando Aplicação...");
+                        break;
+                    default: System.out.println("Opção inválida!");
                 }
                 break;
             case 4:
@@ -66,6 +101,18 @@ public class Menu {
                         menu(arvore);
                         break;
                 }
+                System.out.println("Árvore removida com sucesso!");
+                System.out.println("[1] Retornar ao Menu \n [2] Sair da Aplicação");
+                opcao=entrada.nextInt();
+                switch (opcao){
+                    case 1:
+                        menu(arvore);
+                        break;
+                    case 2:
+                        System.out.println("Encerrando Aplicação...");
+                        break;
+                    default: System.out.println("Opção inválida!");
+                }
 
 
                 menu(arvore);
@@ -74,7 +121,17 @@ public class Menu {
                 System.out.println("Como você deseja exibir a Árvore? \n [1] InOrdem \n [2] PreOrdem \n [3] PosOrdem \n [4] Voltar");
                 opcao = entrada.nextInt();
                 func_ExibirArvore(arvore);
-                menu(arvore);
+                System.out.println("[1] Retornar ao Menu \n [2] Sair da Aplicação");
+                opcao=entrada.nextInt();
+                switch (opcao){
+                    case 1:
+                        menu(arvore);
+                        break;
+                    case 2:
+                        System.out.println("Encerrando Aplicação...");
+                        break;
+                    default: System.out.println("Opção inválida!");
+                }
                 break;
             case 0:
                 System.out.println("Encerrando Aplicação...");
