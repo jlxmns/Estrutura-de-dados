@@ -3,20 +3,17 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-
-
+        //Construindo nossa ArrayList de Alunos através do método de leitura de arquivo de texto
         ArrayList<Aluno> alunosTxt = TextReader.readTxt();
+
+        //Loop de for each para adicionar cada aluno individualmente em nossa árvore binária
         Arvore arvoreBinaria = new Arvore();
         for(Aluno aluno : alunosTxt) {
             arvoreBinaria.adicionarNo(aluno);
         }
 
-        Aluno aluno = new Aluno(7, "Marcos");
-        Aluno aluno1 = new Aluno(8, "Dani");
-        arvoreBinaria.adicionarNo(aluno);
-        arvoreBinaria.adicionarNo(aluno1);
-
-       Menu menu = new Menu();
-       menu.menu(arvoreBinaria);
+        //Exibindo o menu
+        Menu menu = new Menu();
+        menu.menu(arvoreBinaria);
     }
 }

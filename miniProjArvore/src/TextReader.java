@@ -4,32 +4,32 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TextReader {
-    //É uma função que vai retornar uma ArrayList de Aluno (cada um com nome e rgm)
     public static ArrayList<Aluno> readTxt() {
-        //BufferedReader é uma classe pra tornar mais fácil a leitura do arquivo txt
-        //arrayAlunos é nossa variável para armazenar e retornar nossa ArrayList de Aluno
+        //BufferedReader é uma classe com métodos interessantes para leitura de arquivos
         BufferedReader reader;
         ArrayList<Aluno> arrayAlunos = new ArrayList<>();
 
         try {
-            //reader é a variável que vai ler nosso arquivo, linha por linha.
-            //FileReader também é uma classe de leitura, mas usamos métodos apenas do BufferedReader
             reader = new BufferedReader(new FileReader("src/alunos.txt"));
-            //line é uma String que vai armazenar a linha atual que pegamos pelo reader
+            //Variável linha inicializada com a linha inicial do arquivo
+            //Cada vez que é invocado, o readLine() vai para a próxima linha do arquivo txt
             String line = reader.readLine();
 
-            //loop onde criamos um novo aluno e armazenamos a linha atual como RGM e nome dos alunos
-            //também adicionamos esse aluno na nossa ArrayList de alunos
             while (line != null) {
+                //Criando novo aluno usando 2 linhas do arquivo txt
                 Aluno aux = new Aluno();
                 aux.setRgm(Integer.parseInt(line));
                 line = reader.readLine();
                 aux.setNome(line);
+
+                //Adicionando esse aluno à nossa ArrayList de alunos
                 arrayAlunos.add(aux);
-                // read next line
+
+                //Pulando para a próxima linha para a próxima execução do loop
                 line = reader.readLine();
             }
 
+            //Fechando nosso leitor de arquivos
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
